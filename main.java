@@ -1,104 +1,125 @@
 import java.util.Scanner;
+import java.util.Random;
 public class main {
     public static void main(String[] args) {
-        calculatingRectangle();
-        daysinthemonths();
-        crazyCheeter();
-    }
+        System.out.println("Hi. You have a rat problem, well I am the right robot for you!\n"
+                + "You'll have to help me a little though. Just type:\n- 'wall' if one is near\n" +
+                "- 'chair' if it is ahead or\n- 'nothing' if I can keep on forward.\nSo, let's begin!\n");
 
-    public static void calculatingRectangle() {
-        System.out.println("Calculator for rectangles parameter and area");
+        int strikeCount = 4;
+        boolean hunting = true;
 
-        Scanner Height = new Scanner(System.in);
-        System.out.println("Enter height: ");
-        int height = Height.nextInt();
+        while (hunting) {
+            checkingForObstacles();
+                while (gettingReadyToStrike()) {
+                    checkingForObstacles();
+                }
+                strikeCount--;
 
-        Scanner Width = new Scanner(System.in);
-        System.out.println("Enter width: ");
-        int width = Width.nextInt();
-
-        int parameter = (2 * width) + (2 * height);
-        int countenance = width * height;
-        System.out.println("The parameter of the rectangle is " + parameter + " , " +
-                "and its area is " + countenance);
-    }
-
-    public static void daysinthemonths() {
-            Scanner month = new Scanner(System.in);
-            System.out.println("Enter the number of the month you want to check: ");
-            int monthNumber = month.nextInt();
-
-            if (monthNumber == 1) {
-                System.out.println("January has 31 days");
-            } else if (monthNumber == 2) {
-                System.out.println("February has 28 days");
-            } else if (monthNumber == 3) {
-                System.out.println("March has 31 days");
-            } else if (monthNumber == 4) {
-                System.out.println("April has 30 days");
-            } else if (monthNumber == 5) {
-                System.out.println("May has 31 days");
-            } else if (monthNumber == 6) {
-                System.out.println("June has 30 days");
-            } else if (monthNumber == 7) {
-                System.out.println("July has 31 days");
-            } else if (monthNumber == 8) {
-                System.out.println("August has 31 days");
-            } else if (monthNumber == 9) {
-                System.out.println("September has 30 days");
-            } else if (monthNumber == 10) {
-                System.out.println("October has 31 days");
-            } else if (monthNumber == 11) {
-                System.out.println("November has 30 days");
-            } else if (monthNumber == 12) {
-                System.out.println("December has 31 days");
-            } else
-                System.out.println("There are only twelve months and are numbered form 1 to 12");
-    }
-
-    public static void crazyCheeter() {
-        int floor = 9;
-        String neighbor = "Default";
-        switch (floor) {
-            case 9:
-                System.out.println("Етаж " + floor);
-                floor--;
-            case 8:
-                neighbor = " Здравей Мими";
-                System.out.println("Етаж " + floor + ": " + neighbor);
-                floor--;
-            case 7:
-                neighbor = " Как си Пепи";
-                System.out.println("Етаж " + floor + ": " + neighbor);
-                floor--;
-            case 6:
-                neighbor = " Здрасти Ваня";
-                System.out.println("Етаж " + floor + ": " + neighbor);
-                floor--;
-            case 5:
-                neighbor = " Добро утро Хриси";
-                System.out.println("Етаж " + floor + ": " + neighbor);
-                floor--;
-            case 4:
-                neighbor = " Пoсле ще ти звънна Стел";
-                System.out.println("Етаж " + floor + ": " + neighbor);
-                floor--;
-            case 3:
-                neighbor = " Хей Маги";
-                System.out.println("Етаж " + floor + ": " + neighbor);
-                floor--;
-            case 2:
-                neighbor = " Вчера ти писах Дени";
-                System.out.println("Етаж " + floor + ": " + neighbor);
-                floor--;
-            case 1:
-                neighbor = " О, здравей Лен...";
-                System.out.println("Етаж " + floor + ": " + neighbor);
-                floor--;
-            case 0:
-                neighbor = "Ауч";
-                System.out.println(neighbor);
+                if (strikeCount <= 0){
+                    rechargingBattery();
+                    strikeCount  = 4;
+                }
+                if(!keepTheHuntGoing())
                 break;
+            }
+            givingReport();
+        }
+
+    public static void checkingForObstacles() {
+        while (true) {
+            Scanner Obstacle = new Scanner(System.in);
+            System.out.println("Is there something ahead?");
+            String obstacle = Obstacle.nextLine();
+            switch (obstacle) {
+                case "nothing":
+                    System.out.println("Executing: Forward");
+                    break;
+                case "wall":
+                    System.out.println("Executing: Go Sideways");
+                    break;
+                case "chair":
+                    System.out.println("Executing: Jump");
+                    break;
+                default:
+                    System.out.println("Object is not recognized...");
+            }
+            if (obstacle.equals("nothing") || obstacle.equals("wall") || obstacle.equals("chair")) {
+                break;
+            }
         }
     }
+
+    public static boolean gettingReadyToStrike() {
+        boolean IsThisAMouse = false;
+        Scanner Pixels       = new Scanner(System.in);
+        System.out.println("How many pixels does the object in front of me has?");
+        int pixels           = Pixels.nextInt();
+        Random Smash         = new Random();
+
+        if (pixels % 2 == 0) {
+            System.out.println("IT'S A MOUSE! PREPARING FOR STRIKE!\n............");
+            int superSmash = Smash.nextInt(10);
+
+            if ((superSmash + 1) == 5) {
+                System.out.println("Sorry I couldn't kill it, I would've damaged your furniture.");
+            } else System.out.println("The mouse was terminated.\n");
+
+        } else System.out.println("OK, let's keep looking...");
+
+        if (pixels % 2 != 0) {
+            IsThisAMouse = true;
+        }
+        return IsThisAMouse;
+    }
+
+    public static void rechargingBattery() {
+        System.out.println("I am out of power, moving to the nearest plug for recharge...");
+        while (true) {
+            Random Minus        = new Random();
+            Random PLus         = new Random();
+            int powerOnTheMinus = Minus.nextInt(1000);
+            int powerOnThePlus  = Minus.nextInt(1000);
+            if (powerOnTheMinus == powerOnThePlus) {
+                System.out.println("Checking for power, unsuccessful, repeating...");
+
+            } else if (powerOnTheMinus < powerOnThePlus) {
+                System.out.println("This plug is corupted, moving to another one");
+            }
+            if (powerOnTheMinus > powerOnThePlus) {
+                System.out.println("Recharging successful! Ready to strike again");
+                break;
+            }
+        }
+    }
+
+    public static boolean keepTheHuntGoing() {
+        boolean keepHunting = true;
+        while (true) {
+            Scanner Hunt    = new Scanner(System.in);
+            System.out.println("Should I keep hunting? (y/n)");
+            String huntCommand = Hunt.nextLine();
+            switch (huntCommand) {
+                case "y":
+                    keepHunting = true;
+                    break;
+                case "n":
+                    keepHunting = false;
+                    break;
+            }
+            if (huntCommand.equals("y") || huntCommand.equals("n")) {
+                break;
+            }
+        }
+        return keepHunting;
+    }
+
+    public static void givingReport() {
+        for (int speech = 10; speech > 0; speech--) {
+            if (speech % 2 == 0) {
+                System.out.println("I am a Robottttt" + speech);
+            }
+        }
+    }
+
 }
