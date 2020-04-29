@@ -77,7 +77,6 @@ public class main {
         System.out.println("I am out of power, moving to the nearest plug for recharge...");
         while (true) {
             Random Minus        = new Random();
-            Random PLus         = new Random();
             int powerOnTheMinus = Minus.nextInt(1000);
             int powerOnThePlus  = Minus.nextInt(1000);
             if (powerOnTheMinus == powerOnThePlus) {
