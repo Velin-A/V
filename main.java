@@ -53,7 +53,7 @@ public class main {
     public static boolean gettingReadyToStrike() {
         boolean IsThisAMouse = false;
         Scanner Pixels       = new Scanner(System.in);
-        System.out.println("How many pixels does the object in front of me has?");
+        System.out.println("How many pixels does the object in front of me have?");
         int pixels           = Pixels.nextInt();
         Random Smash         = new Random();
 
